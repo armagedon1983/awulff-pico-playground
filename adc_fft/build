@@ -1,0 +1,19 @@
+cmake../
+make
+// set sample rate
+adc_set_clkdiv(CLOCK_DIV);
+void sample(uint8_t *capture_buf) {
+    adc_fifo_drain();
+    adc_run(false);
+
+    dma_channel_configure(dma_chan, &cfg,
+        capture_buf, // dst
+        &adc_hw->fifo, // src
+        NSAMP, // transfer count
+        true // start immediately
+    );
+       gpio_put(LED_PIN, 1);
+    adc_run(true);
+    dma_channel_wait_for_finish_blocking(dma_chan);
+    gpio_put(LED_PIN, 0);
+}
