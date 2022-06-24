@@ -16,7 +16,7 @@
 // 0     = 500,000 Hz
 // 960   = 50,000 Hz
 // 9600  = 5,000 Hz
-#define CLOCK_DIV 960
+#define CLOCK_DIV 0
 #define FSAMP 50000
 
 // Channel 0 is GPIO26
